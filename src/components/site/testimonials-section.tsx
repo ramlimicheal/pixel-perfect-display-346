@@ -1,44 +1,41 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { ArrowLeft, ArrowRight, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import testimonial1Poster from "@/assets/tradeforge/testimonial-1-poster.jpg";
+import avatarAmelia from "@/assets/tradeforge/avatar-amelia.jpg";
+import avatarArron from "@/assets/tradeforge/avatar-arron.jpg";
+import avatarCharlie from "@/assets/tradeforge/avatar-charlie.jpg";
+import testimonial1Poster from "@/assets/tradeforge/testimonial-1.jpg";
 import testimonial1 from "@/assets/tradeforge/testimonial-1.mp4";
-import testimonial2Poster from "@/assets/tradeforge/testimonial-2-poster.jpg";
+import testimonial2Poster from "@/assets/tradeforge/testimonial-2.jpg";
 import testimonial2 from "@/assets/tradeforge/testimonial-2.mp4";
-import testimonial3Poster from "@/assets/tradeforge/testimonial-3-poster.jpg";
+import testimonial3Poster from "@/assets/tradeforge/testimonial-3.jpg";
 import testimonial3 from "@/assets/tradeforge/testimonial-3.mp4";
-import testimonialA1 from "@/assets/tradeforge/testimonial-a1.png";
-import testimonialA2 from "@/assets/tradeforge/testimonial-a2.png";
-import testimonialA3 from "@/assets/tradeforge/testimonial-a3.png";
-import testimonialA4 from "@/assets/tradeforge/testimonial-a4.png";
-import testimonialA5 from "@/assets/tradeforge/testimonial-a5.png";
-import testimonialA6 from "@/assets/tradeforge/testimonial-a6.png";
-import testimonialA7 from "@/assets/tradeforge/testimonial-a7.png";
 import { SplitHeading } from "@/components/site/split-heading";
 
 const VIDEOS = [
   {
     src: testimonial1,
     poster: testimonial1Poster,
+    avatar: avatarCharlie,
     name: "Charlie Speaks",
     handle: "charlie.speaks",
   },
   {
     src: testimonial2,
     poster: testimonial2Poster,
+    avatar: avatarAmelia,
     name: "Amelia Trades",
     handle: "amelia.trades",
   },
   {
     src: testimonial3,
     poster: testimonial3Poster,
+    avatar: avatarArron,
     name: "Trading With Arron",
     handle: "Tradingwitharron",
   },
 ] as const;
-
-const PHOTO_CARDS = [testimonialA1, testimonialA2, testimonialA3, testimonialA4, testimonialA5, testimonialA6, testimonialA7];
 
 function VideoCard({
   video,
@@ -59,7 +56,7 @@ function VideoCard({
   }, [playing]);
 
   return (
-    <div className="relative aspect-[9/16] w-full overflow-hidden rounded-2xl bg-foreground/5">
+    <div className="relative aspect-[9/16] w-full overflow-hidden rounded-2xl shadow-soft">
       <video
         ref={ref}
         src={video.src}
@@ -77,14 +74,24 @@ function VideoCard({
             onPlay();
           }}
           aria-label={`Play testimonial from ${video.name}`}
-          className="group absolute inset-0 flex flex-col justify-between p-4 text-left"
+          className="group absolute inset-0 flex flex-col justify-between text-left"
         >
-          <span className="inline-flex size-9 items-center justify-center rounded-full bg-foreground/50 backdrop-blur transition-transform group-hover:scale-110">
+          <span className="m-4 inline-flex size-10 items-center justify-center rounded-full bg-foreground/50 backdrop-blur transition-transform group-hover:scale-110">
             <span className="ml-0.5 inline-block size-0 border-y-[7px] border-l-[11px] border-y-transparent border-l-white" />
           </span>
-          <span className="rounded-b-xl bg-gradient-to-t from-foreground/70 to-transparent p-3 pt-8 text-sm font-medium text-white">
-            {video.name}
-            <span className="block text-xs font-normal text-white/80">@{video.handle}</span>
+          <span className="flex items-center gap-3 bg-gradient-to-t from-foreground/80 to-transparent p-4 pt-10">
+            <img
+              src={video.avatar}
+              alt=""
+              className="size-9 rounded-full border border-white/40 object-cover"
+              loading="lazy"
+            />
+            <span className="text-sm font-semibold text-white">
+              {video.name}
+              <span className="block text-xs font-normal text-white/80">
+                @{video.handle}
+              </span>
+            </span>
           </span>
         </button>
       )}
@@ -105,7 +112,7 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="bg-background py-20 sm:py-28">
+    <section className="bg-tint-2 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SplitHeading label="Our happy customers">
@@ -137,7 +144,11 @@ export function TestimonialsSection() {
         className="scroll-strip mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:px-6 lg:px-[max(2rem,calc((100vw-80rem)/2+2rem))]"
       >
         {VIDEOS.map((video, i) => (
-          <div key={video.handle} data-card className="w-[220px] shrink-0 snap-start sm:w-[240px]">
+          <div
+            key={video.handle}
+            data-card
+            className="w-[220px] shrink-0 snap-start sm:w-[240px]"
+          >
             <VideoCard
               video={video}
               playing={playingIndex === i}
@@ -145,30 +156,25 @@ export function TestimonialsSection() {
             />
           </div>
         ))}
-        {PHOTO_CARDS.map((img, i) => (
-          <div key={img} data-card className="w-[220px] shrink-0 snap-start sm:w-[240px]">
-            <div className="relative aspect-[9/16] w-full overflow-hidden rounded-2xl shadow-soft">
-              <img
-                src={img}
-                alt={`Trader testimonial ${i + 1}`}
-                loading="lazy"
-                className="absolute inset-0 size-full object-cover"
-              />
-              <span className="absolute left-3 top-3 inline-flex size-9 items-center justify-center rounded-full bg-foreground/40 backdrop-blur">
-                <Quote className="size-4 fill-white text-white" />
-              </span>
+        <div data-card className="w-[220px] shrink-0 snap-start sm:w-[240px]">
+          <div className="card-tint-lavender flex aspect-[9/16] w-full flex-col items-start justify-between rounded-2xl border border-border/50 p-5 shadow-soft">
+            <span className="inline-flex size-10 items-center justify-center rounded-full bg-primary">
+              <Users className="size-5 text-primary-foreground" />
+            </span>
+            <div>
+              <p className="text-3xl font-bold tracking-tight text-foreground">750+</p>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                traders improving with TradeForge every day
+              </p>
+              <Link
+                to="/pricing"
+                className="mt-4 inline-flex items-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-button transition-colors hover:bg-primary-hover"
+              >
+                Join Now
+              </Link>
             </div>
           </div>
-        ))}
-      </div>
-
-      <div className="mt-12 px-4 text-center sm:px-6">
-        <Link
-          to="/pricing"
-          className="inline-flex items-center rounded-lg bg-primary px-6 py-3 text-[15px] font-semibold text-primary-foreground shadow-button transition-colors hover:bg-primary-hover"
-        >
-          Join Now
-        </Link>
+        </div>
       </div>
     </section>
   );

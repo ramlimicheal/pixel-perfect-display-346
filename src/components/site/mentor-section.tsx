@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 
-import mentorMode from "@/assets/tradeforge/mentor-mode.webp";
+import mentorMode from "@/assets/tradeforge/mentor-video.png";
 import { Reveal } from "@/components/site/reveal";
 
 export function MentorSection() {
