@@ -173,6 +173,7 @@ function FeaturesPage() {
         subtitle="No more navigating multiple spreadsheets, platforms, or papers. Everything you need to become a powerful trader is here."
         image={featuresHero}
         imageAlt="TradeForge analytics dashboard overview"
+        align="left"
       />
 
       {/* Alternating feature rows */}
@@ -185,7 +186,7 @@ function FeaturesPage() {
                 key={feature.title}
                 className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
               >
-                <Reveal className={cn(reversed && "lg:order-2")}>
+                <Reveal className={cn(!reversed && "lg:order-2")}>
                   <div
                     className={cn(
                       "rounded-3xl border border-border/50 p-4 shadow-soft",
@@ -204,7 +205,7 @@ function FeaturesPage() {
                     />
                   </div>
                 </Reveal>
-                <Reveal delay={120} className={cn(reversed && "lg:order-1")}>
+                <Reveal delay={120} className={cn(!reversed && "lg:order-1")}>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
                     {feature.eyebrow}
                   </p>
