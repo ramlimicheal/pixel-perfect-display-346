@@ -189,17 +189,13 @@
     background: linear-gradient(160deg, var(--tint-2) 0%, var(--periwinkle) 100%);
   }
 
-  /* Scroll reveal */
+  /* Keep imported page content immediately legible; reveal only adds movement. */
   .reveal {
-    opacity: 0;
     transform: translateY(28px);
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal.is-visible {
-    opacity: 1;
     transform: none;
   }
 
